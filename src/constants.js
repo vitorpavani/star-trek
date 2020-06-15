@@ -1,4 +1,6 @@
-const WIDTH = 1000;
-const HEIGHT = WIDTH;
+let WIDTH = window.innerWidth;
+let HEIGHT = window.innerHeight - 100;
+
+
 
 

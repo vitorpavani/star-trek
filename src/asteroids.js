@@ -1,9 +1,10 @@
 function Asteroid(){
-    this.pos = createVector ( random (WIDTH), random (HEIGHT));
-    this.vel = p5.Vector.random2D();
+    this.pos = createVector ( random (WIDTH,WIDTH + 500), random (HEIGHT,HEIGHT + 500));
+    this.vel = createVector(random(-5,5), random(-5,5));
     this.r = random(40, 80);
     this.numberOfVertex = floor(random (5, 15));
     this.offset = [];
+    this.mass = this.r*0.01;
 
     for(let i = 0; i< this.numberOfVertex;i++){
         this.offset[i] = random(-15,15)
@@ -13,7 +14,7 @@ function Asteroid(){
         //console.log("render")
         push ();
         translate(this.pos.x, this.pos.y)
-        noFill();
+        fill(color('#808080'))
         stroke (255);
         //ellipse (0, 0 , this.r*2)
         
@@ -29,25 +30,29 @@ function Asteroid(){
         pop ();       
     }
 
+    this.gravity = function (){
+      
+        for(let i = 0; i < asteroids.length ; i++){
+
+        let force = p5.Vector.sub(sun.pos, this.pos)
+        let distanceSq = constrain(force.magSq(),100,150);
+        
+        let G = 0.002;
+        let strength = G * (this.mass*sun.mass)/distanceSq
+
+        force.setMag(strength);
+        this.vel.add(force);
+        
+        }        
+
+    }
+
     this.update = function (){
         this.pos.add(this.vel);
         
     }
 
-    this.edges = function (){
-        if (this.pos.x > WIDTH +this.r){
-            this.pos.x  = -this.r;
-        } else if(this.pos.x < -this.r){
-            this.pos.x = WIDTH + this.r;
-        }
 
-        if (this.pos.y > HEIGHT +this.r){
-            this.pos.y  = -this.r;
-        } else if(this.pos.y < -this.r){
-            this.pos.y = HEIGHT + this.r;
-        }
-        
-    }
 
 
 

@@ -31,6 +31,12 @@ class Game {
     // https://p5js.org/reference/#/p5/line
     background(0);
     
+    textSize(32);
+    text(`Gravity = ${Math.round(sun.mass)} N/kg `, 10, 30);
+    fill(255, 255, 255);
+    
+
+    
 
 
   }

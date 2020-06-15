@@ -1,23 +1,46 @@
 function Ship(){
     //this.pos = createVector(WIDTH/2, HEIGHT/2);
     this.pos = createVector(random(WIDTH), random(HEIGHT));
-    this.r = 20;
+    this.imageX = img.width/5;
+    this.imageY = img.height/5;
     this.rotation = 0;
     this.heading = 0;
     this.vel = createVector(0, 0);
     this.isBoosting = false;
+    this.mass = 20;
 
 
     this.render = function (){
         //console.log("render")
         push ();
+
         translate(this.pos.x, this.pos.y)
-        rotate(this.heading+ PI/2);
-        noFill();
+        rotate(this.heading);
+        
         stroke (255);
-        triangle(-this.r, this.r,this.r,this.r,0,-this.r-10);
+        image(img, -this.imageX/2, -this.imageY/2, this.imageX, this.imageY);
+        //triangle(-this.r, this.r,this.r,this.r,0,-this.r-10);
         pop ();      
        
+    }
+
+    this.gravity = function (){
+      
+        let force = p5.Vector.sub(sun.pos, this.pos)
+        let distanceSq = constrain(force.magSq(),100,150);
+        
+        let G = 0.002;
+        let strength = G * (this.mass*sun.mass)/distanceSq
+
+        force.setMag(strength);
+        this.vel.add(force);
+
+
+
+        //this.vel.add(g)
+
+
+
     }
     
     this.boosting = function (b){
@@ -30,7 +53,8 @@ function Ship(){
             this.boost();
         }
         this.pos.add(this.vel);
-        this.vel.mult(0.999);
+        //this.vel.mult(0.98);
+        
     }
 
     this.boost = function (){
@@ -49,16 +73,16 @@ function Ship(){
     }
 
     this.edges = function (){
-        if (this.pos.x > WIDTH +this.r){
-            this.pos.x  = -this.r;
-        } else if(this.pos.x < -this.r){
-            this.pos.x = WIDTH + this.r;
+        if (this.pos.x > WIDTH-this.imageX/2){
+            this.pos.x  = WIDTH-this.imageX/2;
+        } else if(this.pos.x < this.imageX/2){
+            this.pos.x = this.imageX/2;
         }
 
-        if (this.pos.y > HEIGHT +this.r){
-            this.pos.y  = -this.r;
-        } else if(this.pos.y < -this.r){
-            this.pos.y = HEIGHT + this.r;
+        if (this.pos.y > HEIGHT-this.imageY/2 ){
+            this.pos.y  = HEIGHT-this.imageY/2;
+        } else if(this.pos.y < this.imageY/2){
+            this.pos.y = this.imageY/2;
         }
         
     }
