@@ -30,7 +30,7 @@ function setup() {
 
 function preload() {
   
-  img = loadImage('../images/ship.png');
+  img = loadImage('./images/ship.png');
 
   
 }
