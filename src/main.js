@@ -6,7 +6,7 @@ let stars=[];
 let sun;
 let img;
 let fireparticles = [];
-let fr = 60;
+let fr = 55;
 let lazers = [];
 
 
@@ -17,7 +17,7 @@ function setup() {
   frameRate(fr)
   ship = new Ship;
   sun = new Sun;
-  for (let i = 0; i< random(5, 10);i++){
+  for (let i = 0; i< random(10, 20);i++){
     asteroids.push(new Asteroid());
   }
 
@@ -84,6 +84,7 @@ for (let i = fireparticles.length - 1; i >= 0; i--) {
 for (let i = lazers.length - 1; i >= 0; i--) {
   lazers[i].update();
   lazers[i].show();
+  
   if (lazers[i].finished()) {
     // remove this particle
     lazers.splice(i, 1);
@@ -95,12 +96,10 @@ for (let i = lazers.length - 1; i >= 0; i--) {
   }
 
   if ( keyIsDown(39) ) {  
-    console.log("DIREITA")
     ship.setRotation(0.1)
   }
 
   if (keyIsDown(37)) {
-    console.log("ESQUERDA")
     ship.setRotation(-0.1)
   }
 
@@ -122,7 +121,6 @@ function keyPressed() {
 
 function keyReleased(){
 
-  console.log("keyReleased : "+keyCode)
   
  ship.setRotation(0);
   

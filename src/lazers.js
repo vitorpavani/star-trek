@@ -11,6 +11,22 @@ class Lazer {
     }
   
     finished() {
+        if(this.x > WIDTH || this.x < 0) {
+            console.log ("FINISHED")
+            return true;
+        }   
+        if (this.y > HEIGHT || this.y <0) {
+            console.log("FINISHED")
+            return true;
+        }
+
+        for(let i in asteroids){
+            if ( asteroids[i].r > dist(this.x, this.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {                
+                asteroids.splice(i,1);
+                return true;              
+            }
+        }
+        
       return false;
     }
   
