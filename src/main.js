@@ -6,11 +6,15 @@ let stars=[];
 let sun;
 let img;
 let fireparticles = [];
+let fr = 60;
+let lazers = [];
 
 
 function setup() {
   let canvas = createCanvas(WIDTH, HEIGHT);
   canvas.parent("canvas");
+
+  frameRate(fr)
   ship = new Ship;
   sun = new Sun;
   for (let i = 0; i< random(5, 10);i++){
@@ -44,6 +48,8 @@ function draw() {
   ship.update();
   ship.edges();
   ship.gravity();
+
+  
     
   
 //functions for asteroids
@@ -56,9 +62,12 @@ for ( let i = 0; i < asteroids.length ; i++){
 //functions for stars
 for (let star in stars){
   stars[star].render();
+  if(stars[star].finished()){
+    stars.splice(star, 1);
+  }
 }
 
-// functions for fioreparticles
+// functions for fireparticles
 
 
 for (let i = fireparticles.length - 1; i >= 0; i--) {
@@ -69,27 +78,52 @@ for (let i = fireparticles.length - 1; i >= 0; i--) {
     fireparticles.splice(i, 1);
   }
 }
+
+// function for lazers
+
+for (let i = lazers.length - 1; i >= 0; i--) {
+  lazers[i].update();
+  lazers[i].show();
+  if (lazers[i].finished()) {
+    // remove this particle
+    lazers.splice(i, 1);
+  }
+}
+
+  if ( keyIsDown(38) ) {  
+    ship.boost();
+  }
+
+  if ( keyIsDown(39) ) {  
+    console.log("DIREITA")
+    ship.setRotation(0.1)
+  }
+
+  if (keyIsDown(37)) {
+    console.log("ESQUERDA")
+    ship.setRotation(-0.1)
+  }
+
+  
   
 }
 
 function keyPressed() {
   // console.log("I am being pressed!!!!!!!!!!!");
   //This is a p5 variable that gives you a number!
-  console.log("KeyPressed : "+keyCode)
-  if (keyCode == 39){
-    ship.setRotation(0.05);
-  } else if(keyCode == 37){
-    ship.setRotation(-0.05);
-  }else if (keyCode == 38 ){
-    ship.boosting(true);
+  //console.log("KeyPressed : "+keyCode)
+  
+  if(keyCode == 32){
+    ship.fireLazer();
+
   }
+  
 }
 
 function keyReleased(){
 
   console.log("keyReleased : "+keyCode)
-
-  ship.setRotation(0);
-  ship.boosting(false);
-
+  
+ ship.setRotation(0);
+  
 }

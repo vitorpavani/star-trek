@@ -35,36 +35,17 @@ function Ship(){
         force.setMag(strength);
         this.vel.add(force);
 
-
-
         //this.vel.add(g)
 
-
-
     }
 
     
     
-    this.boosting = function (b){
-       this.isBoosting =b;       
-
-    }
-
-    this.update = function (){
-        if (this.isBoosting){
-            this.boost();
-            
-        }
-        this.pos.add(this.vel);
-        //this.vel.mult(0.98);
-        
-    }
 
     this.boost = function (){
         
         let force = p5.Vector.fromAngle(this.heading);
-        console.log(force)
-        force.mult(0.3)
+        force.mult(0.1)
         this.vel.add(force);
 
         //particles system
@@ -74,11 +55,26 @@ function Ship(){
             fireparticles.push(p);
           }
 
+    }
 
+    this.update = function (){
+        
+        this.pos.add(this.vel);
+        //this.vel.mult(0.98);
+        
+    }
 
+    this.fireLazer = function (){
+        
+        let direction = p5.Vector.fromAngle(this.heading);
+        let l = new Lazer(this.pos, direction);
+        lazers.push(l);
+   
 
 
     }
+
+   
 
     this.setRotation = function (angle){
         this.rotation = angle;

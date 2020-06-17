@@ -15,8 +15,8 @@ function Sun(){
         this.frames++;
         translate(this.pos.x, this.pos.y)       
 
-        if ( this.frames/100 < 30) {
-            this.r+=0.1
+        if ( this.frames/100 < 20) {
+            this.r+=0.2
            // console.log(this.frames/200 )
         }
 
@@ -25,7 +25,9 @@ function Sun(){
         
         this.mass = this.r
         fill(sunColor); 
-        ellipse (0, 0 , this.r)        
+        ellipse (0, 0 , this.r)
+    
+
         pop ();  
                   
 
@@ -41,8 +43,7 @@ function Sun(){
 
         }        
         for(let i in asteroids){
-            if (this.r/2 + asteroids[i].r > dist(this.pos.x, this.pos.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {
-                
+            if (this.r/2 + asteroids[i].r > dist(this.pos.x, this.pos.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {                
                 asteroids.splice(i,1);
                 asteroids.push(new Asteroid());                
             }
