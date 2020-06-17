@@ -1,8 +1,8 @@
 function Ship(){
     //this.pos = createVector(WIDTH/2, HEIGHT/2);
     this.pos = createVector(random(WIDTH), random(HEIGHT));
-    this.imageX = img.width/5;
-    this.imageY = img.height/5;
+    this.imageX = img.width/8;
+    this.imageY = img.height/8;
     this.rotation = 0;
     this.heading = 0;
     this.vel = createVector(0, 0);
@@ -27,7 +27,7 @@ function Ship(){
     this.gravity = function (){
       
         let force = p5.Vector.sub(sun.pos, this.pos)
-        let distanceSq = constrain(force.magSq(),100,150);
+        let distanceSq = constrain(force.magSq(),100,250);
         
         let G = 0.002;
         let strength = G * (this.mass*sun.mass)/distanceSq
@@ -42,6 +42,8 @@ function Ship(){
 
 
     }
+
+    
     
     this.boosting = function (b){
        this.isBoosting =b;       
@@ -51,6 +53,7 @@ function Ship(){
     this.update = function (){
         if (this.isBoosting){
             this.boost();
+            
         }
         this.pos.add(this.vel);
         //this.vel.mult(0.98);
@@ -58,9 +61,22 @@ function Ship(){
     }
 
     this.boost = function (){
+        
         let force = p5.Vector.fromAngle(this.heading);
-        force.mult(0.5)
+        console.log(force)
+        force.mult(0.3)
         this.vel.add(force);
+
+        //particles system
+
+        for (let i = 0; i < 30; i++) {
+            let p = new FireParticles(this.pos, force);
+            fireparticles.push(p);
+          }
+
+
+
+
 
     }
 
@@ -88,3 +104,4 @@ function Ship(){
     }
 
 }
+

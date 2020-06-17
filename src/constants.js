@@ -1,5 +1,5 @@
-let WIDTH = window.innerWidth;
-let HEIGHT = window.innerHeight - 100;
+let WIDTH = window.innerWidth-20;
+let HEIGHT = window.innerHeight-20;
 
 
 

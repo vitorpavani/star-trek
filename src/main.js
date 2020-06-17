@@ -5,6 +5,7 @@ let asteroids = [];
 let stars=[];
 let sun;
 let img;
+let fireparticles = [];
 
 
 function setup() {
@@ -12,11 +13,11 @@ function setup() {
   canvas.parent("canvas");
   ship = new Ship;
   sun = new Sun;
-  for (let i = 0; i< random(10, 20);i++){
+  for (let i = 0; i< random(5, 10);i++){
     asteroids.push(new Asteroid());
   }
 
-  for (let i = 0; i<random((WIDTH*HEIGHT)/1000); i++){
+  for (let i = 0; i<random((WIDTH*HEIGHT)/50); i++){
     stars.push(new Star());
   }
 
@@ -52,8 +53,21 @@ for ( let i = 0; i < asteroids.length ; i++){
   asteroids[i].gravity();
 }  
 
+//functions for stars
 for (let star in stars){
   stars[star].render();
+}
+
+// functions for fioreparticles
+
+
+for (let i = fireparticles.length - 1; i >= 0; i--) {
+  fireparticles[i].update();
+  fireparticles[i].show();
+  if (fireparticles[i].finished()) {
+    // remove this particle
+    fireparticles.splice(i, 1);
+  }
 }
   
 }

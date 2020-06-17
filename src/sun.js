@@ -1,5 +1,5 @@
 function Sun(){
-    this.r = random(80, 300);
+    this.r = random(40, 160);
     this.pos = createVector ( random (this.r, WIDTH-this.r)  , random (this.r, HEIGHT-this.r));
     this.mass = this.r*1
     this.frames = 0;
@@ -15,8 +15,8 @@ function Sun(){
         this.frames++;
         translate(this.pos.x, this.pos.y)       
 
-        if ( this.frames/200 < 10) {
-            this.r+=0.25
+        if ( this.frames/100 < 30) {
+            this.r+=0.1
            // console.log(this.frames/200 )
         }
 
@@ -27,9 +27,7 @@ function Sun(){
         fill(sunColor); 
         ellipse (0, 0 , this.r)        
         pop ();  
-            
-
-        
+                  
 
     }
 
@@ -41,9 +39,7 @@ function Sun(){
 
         if (this.r/2 + ship.r > dist(this.pos.x, this.pos.y, ship.pos.x, ship.pos.y) ) {
 
-        }
-
-        
+        }        
         for(let i in asteroids){
             if (this.r/2 + asteroids[i].r > dist(this.pos.x, this.pos.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {
                 

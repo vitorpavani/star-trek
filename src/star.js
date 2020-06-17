@@ -8,7 +8,7 @@ function Star(){
         push ();     
         stroke (255);
         translate(this.pos.x, this.pos.y)       
-        ellipse (0, 0 , random (3));         
+        ellipse (0, 0 , random (4));         
         pop ();       
     }
 

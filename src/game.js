@@ -3,12 +3,7 @@ class Player {
     
   }
 
- 
- 
-
 // Moviments for the players
-
- 
 
 }
 
