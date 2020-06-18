@@ -8,6 +8,7 @@ function Ship(){
     this.vel = createVector(0, 0);
     this.isBoosting = false;
     this.mass = 20;
+    this.shildForce = false;
 
 
     this.render = function (){
@@ -19,8 +20,17 @@ function Ship(){
         
         stroke (255);
         image(img, -this.imageX/2, -this.imageY/2, this.imageX, this.imageY);
-        //triangle(-this.r, this.r,this.r,this.r,0,-this.r-10);
-        pop ();      
+
+        pop (); 
+        if (this.shildForce === true){
+            push();
+            noFill();
+            stroke(255);
+            strokeWeight(random(1,4));
+            ellipse( this.pos.x, this.pos.y, this.imageX+10);
+            pop();
+        }
+             
        
     }
 

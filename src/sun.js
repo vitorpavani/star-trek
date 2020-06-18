@@ -48,7 +48,7 @@ function Sun(){
         for(let i in asteroids){
             if (this.r/2 + asteroids[i].r > dist(this.pos.x, this.pos.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {                
                 asteroids.splice(i,1);
-                asteroids.push(new Asteroid(createVector ( random (WIDTH,WIDTH + 500), random (HEIGHT,HEIGHT + 500)), random(20, 50) ));
+                asteroids.push(new Asteroid(createVector ( random(-1,1)*(WIDTH + 500) , random(-1,1)*(HEIGHT + 500)), random(20, 50) ));
             }
         }
     }

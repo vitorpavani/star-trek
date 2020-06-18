@@ -6,27 +6,40 @@ let stars=[];
 let sun;
 let img;
 let fireparticles = [];
-let fr = 55;
+let fr = 30;
 let lazers = [];
+let points = 0;
+let life = 8;
+let reset = false;
+let galaxy = 0; 
 
 
 function setup() {
   let canvas = createCanvas(WIDTH, HEIGHT);
   canvas.parent("canvas");
-
   frameRate(fr)
+
   ship = new Ship;
+  lazers = [];
+  fireparticles = [];
+
   sun = new Sun;
-  for (let i = 0; i< random(10, 20);i++){
-    asteroids.push(new Asteroid(createVector ( random (WIDTH,WIDTH + 500), random (HEIGHT,HEIGHT + 500)), random(20, 50) ));
+
+  asteroids = [];
+  for (let i = 0; i< (galaxy+1)/2*random(15, 30);i++){
+    asteroids.push(new Asteroid(createVector ( random(-1,1)*(WIDTH + 500) , random(-1,1)*(HEIGHT + 500)), random(20, 50) ));
   }
 
+  stars=[];
   for (let i = 0; i<random((WIDTH*HEIGHT)/50); i++){
     stars.push(new Star());
   }
 
-  
+  points = 0;
+  reset = false;
 }
+
+
 
 function preload() {
   
@@ -104,7 +117,7 @@ for (let i = lazers.length - 1; i >= 0; i--) {
   }
 
   
-  
+  if(reset === true) setup();
 }
 
 function keyPressed() {
@@ -114,7 +127,10 @@ function keyPressed() {
   
   if(keyCode == 32){
     ship.fireLazer();
+  }
 
+  if (keyCode == 17){
+    ship.shildForce = true;
   }
   
 }
@@ -122,6 +138,13 @@ function keyPressed() {
 function keyReleased(){
 
   
- ship.setRotation(0);
+ if( keyCode == 39 || keyCode == 37){
+    ship.setRotation(0);
+ }
+ if (keyCode == 17){
+   ship.shildForce = false;
+ }
+ 
+ 
   
 }
