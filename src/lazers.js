@@ -6,6 +6,7 @@ class Lazer {
       this.vy = 25*direction.y;
       this.alpha = 255;  
       this.heading = direction;
+      
     }
   
     finished() {
@@ -31,6 +32,7 @@ class Lazer {
                 }
                 asteroids.splice(i,1);  
                 points++;
+                hitSound.play();
                 if(points === 10){     
                   reset = true; 
                   galaxy ++;

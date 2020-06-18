@@ -22,7 +22,7 @@ class Game {
   
   drawGrid() {
 
-    background(color('#020425'));    
+    background(color('#000014'));    
     textSize(32);
     text(`Life = ${life} `, 10, 30);
     text(`Points = ${points} `, 10, 60);

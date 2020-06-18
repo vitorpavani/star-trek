@@ -5,6 +5,13 @@ let asteroids = [];
 let stars=[];
 let sun;
 let img;
+
+let mainSound;
+let explodeSound;
+let hitSound;
+let laserSound;
+let thrustSound;
+
 let fireparticles = [];
 let fr = 30;
 let lazers = [];
@@ -13,11 +20,18 @@ let life = 8;
 let reset = false;
 let galaxy = 0; 
 
+var song;
+
 
 function setup() {
   let canvas = createCanvas(WIDTH, HEIGHT);
   canvas.parent("canvas");
   frameRate(fr)
+
+  mainSound.loop();
+  
+  
+
 
   ship = new Ship;
   lazers = [];
@@ -26,12 +40,12 @@ function setup() {
   sun = new Sun;
 
   asteroids = [];
-  for (let i = 0; i< (galaxy+1)/2*random(15, 30);i++){
+  for (let i = 0; i< random(16, 16+ galaxy*8);i++){
     asteroids.push(new Asteroid(createVector ( random(-1,1)*(WIDTH + 500) , random(-1,1)*(HEIGHT + 500)), random(20, 50) ));
   }
 
   stars=[];
-  for (let i = 0; i<random((WIDTH*HEIGHT)/50); i++){
+  for (let i = 0; i< 50; i++){
     stars.push(new Star());
   }
 
@@ -44,6 +58,18 @@ function setup() {
 function preload() {
   
   img = loadImage('./images/ship.png');
+
+  mainSound = loadSound('./sounds/main.mp3');
+  explodeSound = loadSound('./sounds/explode.m4a');
+  hitSound = loadSound('./sounds/hit.m4a');
+  laserSound = loadSound('./sounds/laser.m4a');
+  thrustSound = loadSound('./sounds/thrust.m4a');
+  shieldSound = loadSound('./sounds/forcefield.mp3')
+  
+  laserSound.setVolume(0.2);
+  explodeSound.setVolume(0.5);
+  hitSound.setVolume(0.8);
+  thrustSound.setVolume(0.05);
 
   
 }
@@ -106,18 +132,24 @@ for (let i = lazers.length - 1; i >= 0; i--) {
 
   if ( keyIsDown(38) ) {  
     ship.boost();
+    thrustSound.play(); 
+  } else { 
+    thrustSound.stop();
   }
 
   if ( keyIsDown(39) ) {  
-    ship.setRotation(0.1)
+    ship.setRotation(0.1);
   }
 
   if (keyIsDown(37)) {
-    ship.setRotation(-0.1)
+    ship.setRotation(-0.1);
   }
 
   
-  if(reset === true) setup();
+  if(reset === true) {
+    mainSound.stop();
+    setup();
+  }
 }
 
 function keyPressed() {
@@ -127,10 +159,13 @@ function keyPressed() {
   
   if(keyCode == 32){
     ship.fireLazer();
+    laserSound.play();
+
   }
 
   if (keyCode == 17){
     ship.shildForce = true;
+    shieldSound.play();
   }
   
 }
@@ -143,6 +178,7 @@ function keyReleased(){
  }
  if (keyCode == 17){
    ship.shildForce = false;
+   shieldSound.stop();
  }
  
  

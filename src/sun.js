@@ -18,17 +18,30 @@ function Sun(){
         this.frames++;
         translate(this.pos.x, this.pos.y)      
 
-        if ( this.frames/100 < 20) {
-            this.r+=0.2
+        if ( this.frames/100 < 10) {
+            this.r+=0.4
            // console.log(this.frames/200 )
         }
 
+        if(this.r > 300) this.r = 300;
+
         //console.log(this.dificulty)
 
+        beginShape();
+        for (let angle = 0; angle < TWO_PI; angle+=0.1){            
+            let r = this.r+random(-2,2)
+            let x = r*cos (angle);
+            let y = r*sin (angle);
+            vertex (x,y);
+            
+        
+        }
+        fill(sunColor); 
+        endShape(CLOSE); 
         
         this.mass = this.r
-        fill(sunColor); 
-        ellipse (0, 0 , this.r*(0.5+noise(this.noiseOffSet)) )
+/*      fill(sunColor); 
+        ellipse (0, 0 , this.r*(0.5+noise(this.noiseOffSet)) ) */
         this.noiseOffSet+=0.005
 
         pop ();  

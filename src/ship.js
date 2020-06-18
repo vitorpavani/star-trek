@@ -29,9 +29,32 @@ function Ship(){
             strokeWeight(random(1,4));
             ellipse( this.pos.x, this.pos.y, this.imageX+10);
             pop();
+
+            for(let i in asteroids){
+
+                if ( asteroids[i].r+this.imageX+10 > dist(this.pos.x, this.pos.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {
+              
+                    if( asteroids[i].r > 30 ){
+                      asteroids.push(new Asteroid(createVector ( this.pos.x+random(this.imageX,this.imageX+10), this.pos.y+random(this.imageX,this.imageX+10)), random(15, 25) ));
+                      asteroids.push(new Asteroid(createVector ( this.pos.x+random(this.imageX,this.imageX+10), this.pos.y+random(this.imageX,this.imageX+10)), random(15, 25) ));
+                    }
+
+                    for(let j= 0; j<random(150,300);j++){
+                        let p = new FireParticles(createVector(this.pos.x, this.pos.y), createVector(random(),random ()));
+                        fireparticles.push(p);
+                    }
+                    asteroids.splice(i,1);
+                    points++;
+                    hitSound.play();
+                    if(points === 10){
+                        reset = true;
+                        galaxy ++;
+                    }
+                }
+            }
+            
         }
-             
-       
+                   
     }
 
     this.gravity = function (){
