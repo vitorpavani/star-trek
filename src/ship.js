@@ -45,7 +45,7 @@ function Ship(){
     this.boost = function (){
         
         let force = p5.Vector.fromAngle(this.heading);
-        force.mult(0.1)
+        force.mult(0.2)
         this.vel.add(force);
 
         //particles system
@@ -70,8 +70,6 @@ function Ship(){
         let l = new Lazer(this.pos, direction);
         lazers.push(l);
    
-
-
     }
 
    

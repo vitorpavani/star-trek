@@ -18,7 +18,7 @@ function setup() {
   ship = new Ship;
   sun = new Sun;
   for (let i = 0; i< random(10, 20);i++){
-    asteroids.push(new Asteroid());
+    asteroids.push(new Asteroid(createVector ( random (WIDTH,WIDTH + 500), random (HEIGHT,HEIGHT + 500)), random(20, 50) ));
   }
 
   for (let i = 0; i<random((WIDTH*HEIGHT)/50); i++){

@@ -1,7 +1,7 @@
-function Asteroid(){
-    this.pos = createVector ( random (WIDTH,WIDTH + 500), random (HEIGHT,HEIGHT + 500));
+function Asteroid(pos, r){
+    this.pos = pos;
     this.vel = createVector(random(-5,5), random(-5,5));
-    this.r = random(20, 50);
+    this.r = r;
     this.numberOfVertex = floor(random (5, 15));
     this.offset = [];
     this.mass = this.r*0.01;

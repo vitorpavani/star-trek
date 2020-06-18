@@ -4,8 +4,8 @@ class Lazer {
       this.y = pos.y + direction.y*ship.imageX/2;
     //  this.vx = 5*random(-direction.x , direction.x);
     //  this.vy = 5*random(-1+direction.y, 1+ direction.y );
-      this.vx = 10*direction.x;
-      this.vy = 10*direction.y;
+      this.vx = 25*direction.x;
+      this.vy = 25*direction.y;
       this.alpha = 255;  
       this.heading = direction;
     }
@@ -21,13 +21,24 @@ class Lazer {
         }
 
         for(let i in asteroids){
-            if ( asteroids[i].r > dist(this.x, this.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {                
-                asteroids.splice(i,1);
+            if ( asteroids[i].r > dist(this.x, this.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {            
+                
+                if( asteroids[i].r > 30 ){
+                  asteroids.push(new Asteroid(createVector ( this.x, this.y), random(30, 50)/2 ));
+                  asteroids.push(new Asteroid(createVector ( this.x, this.y), random(30, 50)/2 ));
+                }
+                
+                for (let i = 0; i < random(150,300); i++) {
+                  
+                  let p = new FireParticles(createVector(this.x,this.y), createVector(random(),random ()));
+                  fireparticles.push(p);
+                }
+                asteroids.splice(i,1);  
                 return true;              
             }
         }
         
-      return false;
+      return false;  
     }
   
     update() {

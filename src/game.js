@@ -22,12 +22,10 @@ class Game {
   
   drawGrid() {
 
-    background(0);
-    
+    background(0);    
     textSize(32);
-    text(`Gravity = ${Math.round(sun.mass)} N/kg `, 10, 30);
+    text(`Gravity = ${Math.round(sun.r)} N/kg `, 10, 30);
     fill(255, 255, 255);
-  
   }
   
 }
