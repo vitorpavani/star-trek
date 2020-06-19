@@ -100,9 +100,11 @@ function draw() {
   if ( !startgame ){
 
     textSize(48);
-    text(`Asteroids`, WIDTH/2 - 100, HEIGHT/2);
+    text(`Asteroids`, WIDTH/2 - 200, HEIGHT/2-150);
     textSize(32);
-    text(`Press Enter to Start`, WIDTH/2 - 100, HEIGHT/2+ 50);
+    text(`Press Enter to Start`, WIDTH/2 - 200, HEIGHT/2+ 50);
+    text(`Use Scape Bar to Shoot lasers`, WIDTH/2 - 200, HEIGHT/2+ 100);
+    text(`Control key for Force Shilds`, WIDTH/2 - 200, HEIGHT/2+ 150);
 
     fill(255, 255, 255);
 
