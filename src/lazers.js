@@ -33,7 +33,7 @@ class Lazer {
                 asteroids.splice(i,1);  
                 points++;
                 hitSound.play();
-                if(points === 10){     
+                if(points === 10*(galaxy+1)){     
                   reset = true; 
                   galaxy ++;
                 }

@@ -46,13 +46,28 @@ function Ship(){
                     asteroids.splice(i,1);
                     points++;
                     hitSound.play();
-                    if(points === 10){
+                    if(points === 10*(galaxy+1)){
                         reset = true;
                         galaxy ++;
                     }
                 }
             }
             
+        } else {
+
+            for(let i in asteroids){
+
+                if ( asteroids[i].r+this.imageX > dist(this.pos.x, this.pos.y, asteroids[i].pos.x, asteroids[i].pos.y) ) {
+
+                life--;
+                explodeSound.play();
+                reset = true;
+                galaxy=0;
+                    
+                }
+            }
+
+
         }
                    
     }
@@ -62,7 +77,7 @@ function Ship(){
         let force = p5.Vector.sub(sun.pos, this.pos)
         let distanceSq = constrain(force.magSq(),100,250);
         
-        let G = 0.002;
+        let G = 0.002*(galaxy+1);
         let strength = G * (this.mass*sun.mass)/distanceSq
 
         force.setMag(strength);

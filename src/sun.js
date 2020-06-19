@@ -4,7 +4,7 @@ function Sun(){
     this.mass = this.r*1
     this.frames = 0;
     this.dificulty = 0; 
-    let sunColor = color('#FFFF00');
+    let sunColor = color('#FDB813');
     this.noiseOffSet = random (100);
 
     
@@ -29,7 +29,7 @@ function Sun(){
 
         beginShape();
         for (let angle = 0; angle < TWO_PI; angle+=0.1){            
-            let r = this.r+random(-2,2)
+            let r = this.r+random(-4,4)
             let x = r*cos (angle);
             let y = r*sin (angle);
             vertex (x,y);
