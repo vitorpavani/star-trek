@@ -7,10 +7,6 @@ function Sun(){
     let sunColor = color('#FDB813');
     this.noiseOffSet = random (100);
 
-    
-    
-
-
     this.render = function (){
         //console.log("render")
 
@@ -32,8 +28,7 @@ function Sun(){
             let r = this.r+random(-4,4)
             let x = r*cos (angle);
             let y = r*sin (angle);
-            vertex (x,y);
-            
+            vertex (x,y);  
         
         }
         fill(sunColor); 
